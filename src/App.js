@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import './styles/home.css';
+import './components/nav-top/navtop.css';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import User from './pages/User';
+import Navtop from './components/nav-top/Navtop';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <>
+        <Navtop />
+
+        <Routes>
+
+          <Route path='/' element={<Home />}/>
+          <Route path='/login' element={<Login />}/>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path='/home' element={<User />}/>
+            </Route>
+
+        </Routes>
+      </>
+    </HashRouter>
   );
 }
 
